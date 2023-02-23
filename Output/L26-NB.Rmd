@@ -1,0 +1,52 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Laboratorio 26- Tidy data- Pivotar y unir tablas- Parte 2
+Ver tabla4b (df4b)
+
+Ordenar los datos de la tabla4b (pivotar)
+```{r}
+t4b_PIVOTANTE = tabla4b %>% 
+  pivot_longer(cols = c ("1999", "2000"), names_to = "anio", values_to = "poblacion")
+```
+
+Combinar las versiones ordenadas de la tabla4a y tabla4b (ocupando dplyr)
+```{r}
+union_t4 = left_join(t4a_PIVOTANTE, t4b_PIVOTANTE)
+```
+
+Ver encabezados tabla4b
+```{r}
+head(tabla4b)
+```
+
+Exportar resultado: tabla ordenada
+```{r}
+write.csv(union_t4, file = "union_t4.csv")
+```
+
+Ejercicio 3: Datos anchos con la tabla 2
+Pivotar la tabla2 a lo ancho
+
+Ver encabezados tabla2
+```{r}
+head(tabla2)
+```
+
+Ordenar datos con la tabla2 (pivotar a lo ancho)
+```{r}
+t2_ancha = tabla2 %>% 
+  pivot_wider(names_from = tipo, values_from = cuenta)
+```
+
+Ver encabezados t2_ancha
+```{r}
+head(t2_ancha)
+```
+
+Exportar resultado: tabla ordenada
+```{r}
+write.csv(t2_ancha, file = "t2_ancha.csv")
+```
